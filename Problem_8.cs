@@ -30,7 +30,7 @@ Find the thirteen adjacent digits in the 1000-digit number that have the greates
 
  */
 
-namespace tests
+namespace Problem_8
 {
     internal class Program
     {
