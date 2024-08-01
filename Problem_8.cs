@@ -36,29 +36,31 @@ namespace Problem_8
     {
         static void Main(string[] args)
         {
+// paste the number in a file
+            string wholeNumber = ReadStringOfFile("numberInProblem8.txt");
 
-            string wholeNumber = ReadStringOfFile(@"C:\Users\lbhrea6\OneDrive - Liebherr\Documents\Meine Dokumentationen\ProjektEuler\Neues Textdokument.txt");
-
+         // cut the number into numbers of 13 digits
             List<string> sequencesOf13s = SubTo13sList(wholeNumber);
 
-
+// no need for 0 containing sequences since we are multiplying (num * 0 = 0)
             EliminateSequencesContaining0(ref sequencesOf13s);
 
-
+//  multiplying and associating each product to its seqence
             Dictionary<string, ulong> sequencesAndProducts = new Dictionary<string, ulong>();
             foreach (string sequence in sequencesOf13s)
             {
                 ulong product = MultipleDigitsOfSequence(sequence);
                 sequencesAndProducts.Add(sequence, product);
             }
-            // do the other way
+         
+            // i had enough so i decided to use linq 
             ulong highestValue = sequencesAndProducts.MaxBy(entry => entry.Value).Value;
             Console.WriteLine(highestValue);
 
         }
 
 
-        static ulong MultipleDigitsOfSequence(string sequence)
+        static ulong MultiplyDigitsOfSequence(string sequence)
         {
             ulong product = 1;
             for (int i = 0; i < sequence.Length; i++)
@@ -67,17 +69,7 @@ namespace Problem_8
             }
             return product;
         }
-
-
-        static List<long> StringsListToLongsList(List<string> list)
-        {
-            List<long> longsList = new List<long>();
-            foreach (string element in list)
-            {
-                longsList.Add(long.Parse(element));
-            }
-            return longsList;
-        }
+      
         static void EliminateSequencesContaining0(ref List<string> sequences)
         {
             foreach (string sequence in sequences.ToList())
