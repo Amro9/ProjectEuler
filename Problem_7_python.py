@@ -1,30 +1,25 @@
 #By listing the first six prime numbers: 2,3,5,7,11, and 13, we can see that the 6th prime is 13.What is the 10001st prime number?
 
-import math
+import time
 
-def is_prime(n):
-    if n <= 1:
-        return False
-    if n <= 3:
-        return True
-    if n % 2 == 0 or n % 3 == 0:
-        return False
-    i = 5
-    while i * i <= n:
-        if n % i == 0 or n % (i + 2) == 0:
+allPrimeNums = 0
+num = 2
+def DeterminePrime(num):
+    for i in range(2,num + 1):
+        #if i == num : return True
+        if num % i == 0 :
             return False
-        i += 6
     return True
+        
 
-def find_nth_prime(n):
-    count = 0
-    candidate = 1
-    while count < n:
-        candidate += 1
-        if is_prime(candidate):
-            count += 1
-    return candidate
+start_time = time.time()
 
+while(allPrimeNums != 10001):
+    if DeterminePrime(num): 
+        allPrimeNums += 1
+    num += 1
+end_time = time.time()
+execution_time = end_time - start_time
+print("Execution time:", execution_time, "seconds")
+print(num)
 
-prime_10001 = find_nth_prime(10001)
-print(prime_10001)
